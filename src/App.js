@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [jokes, setJokes] = useState([]);
+  const [toggleFetch, setToggleFetch] = useState(false);
 
   useEffect(() => {
     const getJokes = async () => {
@@ -16,18 +17,18 @@ function App() {
       setJokes(resp.data.records);
     };
     getJokes();
-  }, []);
+  }, [toggleFetch]);
 
   return (
     <div className="App">
       <Nav />
       <Route exact path="/">
         {jokes.map((joke) => (
-          <Joke joke={joke} key={joke.id} />
+          <Joke joke={joke} key={joke.id} setToggleFetch={setToggleFetch} />
         ))}
       </Route>
       <Route path="/new">
-        <Form />
+        <Form setToggleFetch={setToggleFetch} />
       </Route>
     </div>
   );

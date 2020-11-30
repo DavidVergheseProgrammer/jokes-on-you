@@ -18,6 +18,7 @@ function Form(props) {
     // make our axios request
     await axios.post(baseURL, { fields }, config);
     // ...what next?
+    props.setToggleFetch((prev) => !prev);
   };
 
   return (
