@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { baseURL, config } from "../services";
 
@@ -17,6 +18,9 @@ function Joke(props) {
       <strong>
         <p>{props.joke.fields.author}</p>
       </strong>
+      <Link to={`/edit/${props.joke.id}`}>
+        <button>FIX ME</button>
+      </Link>
       <button onClick={handleDelete}>YEET</button>
     </div>
   );
