@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Route } from "react-router-dom";
+import Form from "./components/Form";
+import Joke from "./components/Joke";
+import Nav from "./components/Nav";
 import { baseURL, config } from "./services";
 import "./App.css";
 
@@ -16,9 +20,15 @@ function App() {
 
   return (
     <div className="App">
-      {jokes.map((joke) => (
-        <p>{joke.fields.setup}</p>
-      ))}
+      <Nav />
+      <Route exact path="/">
+        {jokes.map((joke) => (
+          <Joke joke={joke} key={joke.id} />
+        ))}
+      </Route>
+      <Route path="/new">
+        <Form />
+      </Route>
     </div>
   );
 }
