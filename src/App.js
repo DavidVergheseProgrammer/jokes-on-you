@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseURL, config } from "./services";
+import "./App.css";
 
 function App() {
+  const [jokes, setJokes] = useState([]);
+
+  useEffect(() => {
+    const getJokes = async () => {
+      const resp = await axios.get(baseURL, config);
+      setJokes(resp.data.records);
+    };
+    getJokes();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {jokes.map((joke) => (
+        <p>{joke.fields.setup}</p>
+      ))}
     </div>
   );
 }
